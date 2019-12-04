@@ -26,23 +26,56 @@ int main() {
 
     char fileList[] = "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt "
                "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy.txt "
-               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy2.txt";
-    char fileList2[] = "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt "
-                       "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy.txt "
-                       "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy2.txt";;
-    char fileList3[] = "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt "
-                       "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy.txt "
-                       "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy2.txt";;
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy2.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy3.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy4.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy5.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy6.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy7.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy8.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy9.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy10.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy11.txt "
+               "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy12.txt";
 
+    char fileList2[] = "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy2.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy3.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy4.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy5.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy6.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy7.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy8.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy9.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy10.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy11.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy12.txt";
+
+    char fileList3[] = "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy2.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy3.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy4.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy5.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy6.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy7.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy8.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy9.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy10.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy11.txt "
+                      "/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1copy12.txt";
 
     scanFiles(fileList);
 
+    printf("File 1 changed\n");
     FILE *f1;
     f1 = fopen("/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt", "w");
-    fputs("extra",f1);
+    fputs("changes",f1);
     fclose(f1);
     scanFiles(fileList2);
 
+    printf("File 1 changed back to original\n");
     FILE *f2;
     f2 = fopen("/home/gagnonma/CIS241projectfinalsolution/merkle-hash-tree/projectFiles/file1.txt", "w");
     fputs("File 1",f2);
@@ -166,8 +199,7 @@ char* scanFiles(char fileList[]){
     //printf("\n%d\n",maxAmountNodes);
     char tree[maxAmountNodes][33];
     char hash[MD5_STR_LEN + 1];
-    char topHash[MD5_STR_LEN + 1];
-    int numOfFiles = 0;
+
 
     for(int j =0; j < maxAmountNodes; j++){
         strcpy(tree[j],"");
@@ -181,11 +213,13 @@ char* scanFiles(char fileList[]){
     while(fileName){
         Compute_file_md5(fileName,hash);
         strcpy(tree[i],hash);
+        tree[i][32] = '\0';
         //printf("%d : %s\n",i,tree[i]);
         fileName = strtok(NULL," ");
         i++;
     }
-    /*for(int j =0; j < maxAmountNodes; j++){
+    /*
+    for(int j =0; j < maxAmountNodes; j++){
         printf("tree[%d] = %s\n",j,tree[j]);
     }*/
     //combine hashes
@@ -197,13 +231,14 @@ char* scanFiles(char fileList[]){
         //combine index and index+1
         //at the last file but it doesnt fill the tree
         if(strcmp(tree[index+1],"") == 0){
+            //printf("Copy tree[%d] to tree[%d]\n",index,dest);
             strcpy(tree[dest],tree[index]);
-            int diff = levelStart+power(2,currHeight-1) - n;
-            dest += diff;
             index = levelStart+power(2,currHeight-1);
+            dest = index + power(2,currHeight-2);
             levelStart = index;
             currHeight--;
         }else {
+            //printf("Combine tree[%d] and tree[%d] into tree[%d]\n",index,index+1,dest);
             const char *mixed = strcat(tree[index], tree[index + 1]);
             Compute_string_md5((unsigned char *) mixed, strlen(mixed), tree[dest]);
             dest++;
